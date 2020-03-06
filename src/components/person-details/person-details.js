@@ -9,7 +9,7 @@ export default class PersonDetails extends Component {
 
   state = {
     person: null,
-    loading: true
+    loading: false
   }
 
   updatePerson() {
@@ -32,11 +32,12 @@ export default class PersonDetails extends Component {
   }
 
   render() {
+    const { loading } = this.state;
     if (!this.state.person) {
-      return <span>Select a Person from a list</span>
+    return <div className="person-details card">{loading ? <Spinner/> : <span>Select a Person from a list</span>}</div>
     }
 
-    const { loading } = this.state;
+    
 
     const content = loading ? <Spinner /> : <PersonDetailsView person={this.state.person} />
     return (
