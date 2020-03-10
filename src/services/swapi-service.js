@@ -61,6 +61,7 @@ export default class SwapiService {
       return `${this._imageBase}/planets/${id}.jpg`
     };
   
+
     _extractId = (item) => {
       const idRegExp = /\/([0-9]*)\/$/;
       return item.url.match(idRegExp)[1];
