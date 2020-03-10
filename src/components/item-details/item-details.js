@@ -1,58 +1,59 @@
 import React, { Component } from 'react';
 
-import './person-details.css';
+import './item-details.css';
 import SwapiService from '../../services/swapi-service'
 import Spinner from '../spinner'
 import ErrorButton from '../error-button';
-export default class PersonDetails extends Component {
+
+export default class ItemDetails extends Component {
 
   swapiService = new SwapiService();
 
   state = {
-    person: null,
+    item: null,
     loading: false
   }
 
-  updatePerson() {
-    const { personId } = this.props;
-    if (!personId) {
+  updateItem() {
+    const { itemId } = this.props;
+    if (!itemId) {
       return
     }
-    this.swapiService.getPerson(personId)
-      .then(person => this.setState({ person, loading: false }))
+    this.swapiService.getPerson(itemId)
+      .then(item => this.setState({ item, loading: false }))
   }
 
   componentDidMount() {
-    this.updatePerson()
+    this.updateItem()
   }
   componentDidUpdate(prevProps) {
-    if (this.props.personId !== prevProps.personId) {
+    if (this.props.itemId !== prevProps.itemId) {
       this.setState({ loading: true })
-      this.updatePerson()
+      this.updateItem()
     }
   }
 
   render() {
     const { loading } = this.state;
-    if (!this.state.person) {
-    return <div className="person-details card">{loading ? <Spinner/> : <span>Select a Person from a list</span>}</div>
+    if (!this.state.item) {
+    return <div className="item-details card">{loading ? <Spinner/> : <span>Select a Person from a list</span>}</div>
     }
 
     
 
-    const content = loading ? <Spinner /> : <PersonDetailsView person={this.state.person} />
+    const content = loading ? <Spinner /> : <ItemDetailsView item={this.state.item} />
     return (
-      <div className="person-details card">
+      <div className="item-details card">
         {content}
       </div>
     )
   }
 }
 
-const PersonDetailsView = ({ person }) => {
-  const { id, name, gender, birthYear, eyeColor } = person;
+const ItemDetailsView = ({ item }) => {
+  const { id, name, gender, birthYear, eyeColor } = item;
   return (<React.Fragment>
-    <img className="person-image" src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt='character' />
+    <img className="item-image" src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt='character' />
 
     <div className="card-body">
       <h4>{name}</h4>
