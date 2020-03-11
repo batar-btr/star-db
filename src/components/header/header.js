@@ -4,11 +4,11 @@ import './header.css'
 const Header = () => {
     return (
         <div className='header d-flex'>
-            <h3><a href={null}>Star DB</a></h3>
+            <h3><button>Star DB</button></h3>
             <ul className='d-flex'>
-                <li><a href={null}>People</a></li>
-                <li><a href={null}>Planets</a></li>
-                <li><a href={null}>Starships</a></li>
+                <li><button>People</button></li>
+                <li><button>Planets</button></li>
+                <li><button>Starships</button></li>
             </ul>
         </div>
     );

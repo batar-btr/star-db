@@ -6,6 +6,7 @@ import SwapiService from '../../services/swapi-service';
 import ErrorBoundry from '../error-boundry';
 import ItemDetails, { Record } from '../item-details';
 import Row from '../row'
+import ItemList from '../item-list/item-list';
 
 
 export default class App extends Component {
@@ -45,12 +46,17 @@ export default class App extends Component {
                 getData={getStarship}
                 getImgUrl={getStarshipImage}
             >
-                <Record field='model' label='Model'/>
-                <Record field='length' label='Length'/>
-                <Record field='costInCredits' label='Cost'/>
+                <Record field='model' label='Model' />
+                <Record field='length' label='Length' />
+                <Record field='costInCredits' label='Cost' />
             </ItemDetails>
         );
-
+        const peopleList = (<ItemList getData={this.swapiService.getAllPeople}>
+            {item => item.name}
+        </ItemList>)
+        const starshipList = (<ItemList getData={this.swapiService.getAllStarships} >
+            {item => item.name}
+        </ItemList>)
 
         return (
             <ErrorBoundry>
@@ -60,6 +66,11 @@ export default class App extends Component {
                         left={personDetails}
                         right={starshipDetails}
                     />
+                    <Row
+                        left={peopleList}
+                        right={starshipList}
+                    />
+
                 </div>
             </ErrorBoundry>
         );
