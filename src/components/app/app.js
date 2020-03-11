@@ -4,9 +4,15 @@ import './app.css';
 import Header from '../header';
 import SwapiService from '../../services/swapi-service';
 import ErrorBoundry from '../error-boundry';
-import ItemDetails, { Record } from '../item-details';
 import Row from '../row'
-import ItemList from '../item-list/item-list';
+import {
+    PersonDetails,
+    PlanetDetails,
+    StarshipDetails,
+    PersonList,
+    PlanetList,
+    StarshipList
+} from '../sw-components'
 
 
 export default class App extends Component {
@@ -27,36 +33,19 @@ export default class App extends Component {
 
     render() {
 
-        const { getPerson, getStarship, getPersonImage, getStarshipImage } = this.swapiService
-
         const personDetails = (
-            <ItemDetails
-                itemId={11}
-                getData={getPerson}
-                getImgUrl={getPersonImage}
-            >
-                <Record field='gender' label='Gender' />
-                <Record field='eyeColor' label='Eye Color' />
-            </ItemDetails>
+            <PersonDetails itemId={12}/>
         );
 
         const starshipDetails = (
-            <ItemDetails
-                itemId={5}
-                getData={getStarship}
-                getImgUrl={getStarshipImage}
-            >
-                <Record field='model' label='Model' />
-                <Record field='length' label='Length' />
-                <Record field='costInCredits' label='Cost' />
-            </ItemDetails>
+            <StarshipDetails itemId={5}/>
         );
-        const peopleList = (<ItemList getData={this.swapiService.getAllPeople}>
+        const peopleList = (<PersonList>
             {item => item.name}
-        </ItemList>)
-        const starshipList = (<ItemList getData={this.swapiService.getAllStarships} >
+        </PersonList>)
+        const starshipList = (<PlanetList>
             {item => item.name}
-        </ItemList>)
+        </PlanetList>)
 
         return (
             <ErrorBoundry>
