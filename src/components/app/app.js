@@ -14,6 +14,8 @@ import {
     StarshipList
 } from '../sw-components'
 
+import { SwapiServiceProvider } from '../swapi-service-context'
+
 
 export default class App extends Component {
 
@@ -34,33 +36,30 @@ export default class App extends Component {
     render() {
 
         const personDetails = (
-            <PersonDetails itemId={12}/>
+            <PersonDetails itemId={12} />
         );
 
         const starshipDetails = (
-            <StarshipDetails itemId={5}/>
+            <StarshipDetails itemId={5} />
         );
-        const peopleList = (<PersonList>
-            {item => item.name}
-        </PersonList>)
-        const starshipList = (<PlanetList>
-            {item => item.name}
-        </PlanetList>)
+
 
         return (
             <ErrorBoundry>
-                <div className='app'>
-                    <Header />
-                    <Row
-                        left={personDetails}
-                        right={starshipDetails}
-                    />
-                    <Row
-                        left={peopleList}
-                        right={starshipList}
-                    />
+                <SwapiServiceProvider value={this.swapiService}>
+                    <div className='app'>
+                        <Header />
+                        <Row
+                            left={personDetails}
+                            right={starshipDetails}
+                        />
+                        <Row
+                            left={<PersonList />}
+                            right={<StarshipList />}
+                        />
 
-                </div>
+                    </div>
+                </SwapiServiceProvider>
             </ErrorBoundry>
         );
     }
