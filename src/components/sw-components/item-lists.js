@@ -21,7 +21,7 @@ const {
 
 const withChildFunction = (Wrapped, fn) => props => (<Wrapped {...props}>{fn}</Wrapped>)
 
-const renderName = ({ name }) => (<span>name</span>)
+const renderName = ({ name }) => (<span>{name}</span>)
 const renderModelAndName = ({ name, model }) => (<span>{name} ({model})</span>)
 const renderPopulationAndName = ({ population, name }) => (<span>{name}(population: {population})</span>)
 
