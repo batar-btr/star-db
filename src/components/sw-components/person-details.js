@@ -16,4 +16,4 @@ const mapMethodToProps =(swapiService) =>({
     getImgUrl: swapiService.getPersonImage
 })
 
-export default withSwapiService( PersonDetails, mapMethodToProps);
+export default withSwapiService( mapMethodToProps)( PersonDetails);
