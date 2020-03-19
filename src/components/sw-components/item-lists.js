@@ -1,8 +1,8 @@
 import React from 'react'
 import ItemList from '../item-list' 
-import { withData, withSwapiService } from '../hoc'
+import { withData, withSwapiService, withChildFunction, compose } from '../hoc'
 
-const withChildFunction = fn => Wrapped => props => (<Wrapped {...props}>{fn}</Wrapped>)
+
 
 const renderName = ({ name }) => (<span>{name}</span>)
 const renderModelAndName = ({ name, model }) => (<span>{name} ({model})</span>)
@@ -23,15 +23,23 @@ const starShipMethodsToProps = swapiService => ({
 })
 
 
-const PersonList = withSwapiService(personMethodsToProps)(
-    withData(withChildFunction(renderName)(ItemList)));
+const PersonList = compose(
+    withSwapiService(personMethodsToProps),
+    withData,
+    withChildFunction(renderName)
+)(ItemList)
 
-const PlanetList = withSwapiService(planetMethodsToProps)(
-    withData(withChildFunction(renderPopulationAndName)(ItemList)));
+const PlanetList = compose(
+    withSwapiService(planetMethodsToProps),
+    withData,
+    withChildFunction(renderPopulationAndName)
+)(ItemList)
 
-const StarshipList = withSwapiService(starShipMethodsToProps)(
-    withData(withChildFunction(renderModelAndName)(ItemList)));
-    
+const StarshipList = compose(
+    withSwapiService(starShipMethodsToProps),
+    withData,
+    withChildFunction(renderModelAndName)
+)(ItemList)
 
 export {
     PersonList,
